@@ -1,0 +1,33 @@
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Employee</h4>
+      </div>
+      <div class="modal-body">
+        <label>Employee Name</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeName">
+
+        <label>Employee Adddress</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeName">
+
+        <label>Employee Contact</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeName">
+        
+        <label>Employee Email</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeName">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

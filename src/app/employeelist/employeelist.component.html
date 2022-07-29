@@ -1,0 +1,115 @@
+<br><br>
+<div class="alert alert-warning" role="alert" *ngIf="dangerAlert">
+  Size is getting full..!!
+  <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row" style="margin: 15px;">
+     <div class="col-xs-12">
+        <mat-progress-bar mode="determinate" value="{{ProgressBarSize}}"  ></mat-progress-bar>
+     </div>
+</div>    
+<br><br> 
+<app-employeemaster (EmployeeCreated)="onEmployeeAdded($event)"></app-employeemaster>
+<hr>
+<div class="row">
+    <div class="col-xs-12">
+            
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="table table-bordered">
+
+              <ng-container matColumnDef="SrNo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>SrNo</th>
+                <td mat-cell *matCellDef="let element; let i = index" class="amt">  {{i+1}}  </td>
+            </ng-container> 
+
+                <ng-container matColumnDef="EmployeeName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.EmployeeName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EmployeeAddress">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.EmployeeAddress}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EmployeeContact">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Contact </th>
+                    <td mat-cell *matCellDef="let element"> {{element.EmployeeContact}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EmployeeEmail">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.EmployeeEmail}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EmployeeEdit">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
+                    <td mat-cell *matCellDef="let element"> 
+
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" (click)="openPopup(element)"></span>   
+                    
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="EmployeeDelete">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+                  <td mat-cell *matCellDef="let element;let i=index"> 
+
+                          <span class="glyphicon glyphicon-trash" aria-hidden="true" (click)="DeleteElement(i)"></span>   
+                  
+                  </td>
+              </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                    <!--td class="mat-cell" colspan="3">No data matching the filter "{{input.value}}"</td-->
+                </tr>
+            </table>
+
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+        </div>
+            
+    </div>
+</div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Employee</h4>
+      </div>
+      <div class="modal-body">
+        <label>Employee Name</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeName">
+
+        <label>Employee Adddress</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeAddress">
+
+        <label>Employee Contact</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeContact">
+        
+        <label>Employee Email</label>
+        <input type="text" class="form-control" [(ngModel)]="Update_EmployeeEmail" disabled="true">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" 
+                (click)="Update()">
+          Update
+        </button>
+        <button type="button" class="btn btn-danger" 
+                (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
